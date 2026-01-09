@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block 'body' %}
+<div class="row justify-content-center mt-5">
+    <br>
+    {% if status == '0' %}
+    <div class="alert alert-danger" role="alert">
+        Usuário criado.
+    </div>
+    {% endif %}
+    {% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+        Senha deve ter no minimo 8 caracteres
+    </div>
+    {% endif %}
+    {% if status == '2' %}
+    <div class="alert alert-danger" role="alert">
+        Senha deve ter no máximo 16 caracteres
+    </div>
+    {% endif %}
+    {% if status == '3' %}
+    <div class="alert alert-danger" role="alert">
+        Senha e confirmação da senha são diferentes
+    </div>
+    {% endif %}
+    {% if status == '4' %}
+    <div class="alert alert-danger" role="alert">
+        Email já existe
+    </div>
+    {% endif %}
+    {% if status == '5' %}
+    <div class="alert alert-danger" role="alert">
+        Preencha todos os campos
+    </div>
+    {% endif %}
+    {% if status == '6' %}
+    <div class="alert alert-danger" role="alert">
+        Falha do sistema, tente novamente.
+    </div>
+    {% endif %}
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">CADASTRAR</h3>
+                <form action="{% url 'cadastrar' %}" method="POST" >
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Usuário (E-mail)</label>
+                        <input type="email" name="email" class="form-control" placeholder="nome@exemplo.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Senha</label>
+                        <input type="password" name="senha" class="form-control" placeholder="Sua senha">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar Senha</label>
+                        <input type="password" name="confirmar_senha" class="form-control" placeholder="Sua senha">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Usuário</label>
+                        <br>
+                        <input type="radio" class="form-check-input" name="tipo" id="tipo-usuario" value="I"> Inquilino
+                        <input type="radio" class="form-check-input" name="tipo" id="tipo-usuario" value="P"> Proprietário
+                    </div>
+                    <div class="d-grid">
+                        <input type="submit" class="btn btn-primary" value="Cadastrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

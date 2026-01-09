@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block 'titulo' %}Cadastrar Propriedade{% endblock %}
+
+{% block 'body' %}
+<div class="card shadow mb-5">
+    {% if status == '0' %}
+        <div class="alert alert-success" role="alert">
+            Propriedade cadastrada.
+        </div>
+    {% endif %}
+    {% if status == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Preencha todos os campos
+        </div>
+    {% endif %}
+    {% if status == '2' %}
+        <div class="alert alert-danger" role="alert">
+            Erro do sistema.
+        </div>
+    {% endif %}
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0 text-center">Cadastre sua Propriedade</h4>
+    </div>
+    <div class="card-body p-4">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nome do Imóvel</label>
+                    <input type="text" name="nome" class="form-control" placeholder="Ex: Casa de Praia">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Preço por noite</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input type="number" name="preco" class="form-control" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea name="descricao" class="form-control" rows="3" placeholder="Detalhes do imóvel..."></textarea>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Endereço</label>
+                    <input type="text" name="endereco" class="form-control">
+                </div>
+            </div>
+
+            <div class="mt-4 mb-4">
+                <label class="form-label">Foto da Propriedade</label>
+                <input type="file" name="foto" class="form-control">
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg">CADASTRAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

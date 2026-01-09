@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block 'titulo' %} Tela Inicial {% endblock %}
+{% block 'body' %}
+<div class="p-5 mb-4 bg-white border rounded-3 shadow-sm text-center">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Bem-vindo ao Sistema de Aluguel</h1>
+        <p class="col-md-8 fs-4 mx-auto mt-3">
+            {{ "Esse projeto foi elaborado como requisito de um trabalho da matéria de Programação Web 2" }}
+        </p>
+        <hr class="my-4">
+        <p class="text-muted">
+            <strong>Desenvolvido por:</strong> <a href="https://github.com/Eynz6002" class="text-decoration-none">Enzo Ytalo</a>
+        </p>
+        <a href="{% url 'cadastrar' %}" class="btn btn-primary btn-lg px-5">Cadastrar</a>
+        <a href="{% url 'logar' %}" class="btn btn-primary btn-lg px-5">Login</a>
+    </div>
+</div>
+{% endblock %}

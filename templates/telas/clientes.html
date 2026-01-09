@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block 'titulo' %}Locais Disponíveis{% endblock %}
+
+{% block 'body' %}
+<h2 class="mb-4 text-center">Locais Disponíveis</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for i in propriedades %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ i.foto_padrao }}" class="card-img-top" alt="{{ i.titulo }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.nome }}</h5>
+                <p class="card-text text-muted small">{{ i.descricao|truncatechars:100 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-success">R$ {{ i.preco }}/noite</span>
+                    <a href="{% url 'confirmar-aluguel' i.id %}" class="btn btn-primary btn-sm">
+                        Alugar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center mt-5">
+        <p class="alert alert-info">Ainda não há propriedades cadastradas.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

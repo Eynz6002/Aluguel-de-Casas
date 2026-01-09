@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block 'body' %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                {% if status == '1' %}
+                <div class="alert alert-danger" role="alert">
+                    Usuário não existe.
+                </div>
+                {% endif %}
+                {% if status == '2' %}
+                <div class="alert alert-danger" role="alert">
+                    Senha incorreta.
+                </div>
+                {% endif %}
+                <h3 class="card-title text-center mb-4">LOGIN</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Usuário (E-mail)</label>
+                        <input type="email" class="form-control" name="email" placeholder="nome@exemplo.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Senha</label>
+                        <input type="password" class="form-control" name="senha" placeholder="Sua senha">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
