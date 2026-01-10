@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from propriedade.models import Propriedade
-from usuario.models import Usuario
+from aluguel.models import Aluguel
 from django.http import Http404, HttpResponse
 from django.contrib import auth
 
@@ -19,8 +19,14 @@ def alugar_casa(request):
         return HttpResponse('Você não tem acesso à essa página.')
 
 def confirmar_aluguel(request, id):
+    cliente = auth.get_user(request)
     try:
         propriedade = Propriedade.objects.get(id=id)
+        novo_aluguel = Aluguel(
+            propriedade=propriedade,
+            inquilino=cliente
+        )
+        novo_aluguel.save()
     except Propriedade.DoesNotExist:
         raise Http404("Casa não encontrada")
     

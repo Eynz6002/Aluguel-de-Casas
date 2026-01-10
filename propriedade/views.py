@@ -54,10 +54,8 @@ def listar_casas_proprietario(request):
 def desalugar(request, id):
     try:
         propriedade = Propriedade.objects.get(id=id)
+        propriedade.disponivel = True
+        propriedade.save()
+        return render(request, "telas/desalugar.html")
     except Propriedade.DoesNotExist:
         raise Http404("Casa não encontrada")
-    
-    propriedade.disponivel = True
-    propriedade.save()
-    
-    return render(request, "telas/desalugar.html")
