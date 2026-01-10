@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block 'body' %}
 <div class="row justify-content-center mt-5">
+    <div class="d-grid mt-2">
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary">Voltar</a>
+    </div>
     <br>
     {% if status == '0' %}
     <div class="alert alert-success" role="alert">
@@ -41,7 +44,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <h3 class="card-title text-center mb-4">CADASTRAR</h3>
-                <form action="{% url 'cadastrar' %}" method="POST" >
+                <form action="{% url 'cadastrar' %}" method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label class="form-label">Usuário (E-mail)</label>
@@ -59,7 +62,8 @@
                         <label class="form-label">Tipo de Usuário</label>
                         <br>
                         <input type="radio" class="form-check-input" name="tipo" id="tipo-usuario" value="I"> Inquilino
-                        <input type="radio" class="form-check-input" name="tipo" id="tipo-usuario" value="P"> Proprietário
+                        <input type="radio" class="form-check-input" name="tipo" id="tipo-usuario" value="P">
+                        Proprietário
                     </div>
                     <div class="d-grid">
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
