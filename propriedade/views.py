@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import request
 from django.contrib import auth
 from propriedade.models import Propriedade
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 # Create your views here.
+def tela_proprietario(request):
+    return render(request, 'telas/tela-proprietario.html')
 def cadastrar_propriedade(request):
     proprietario = auth.get_user(request)
 
@@ -34,3 +36,28 @@ def cadastrar_propriedade(request):
             return render(request, 'telas/casas.html', {'status': status})
     else:
         return HttpResponse('Você não tem acesso à essa página.')
+
+def listar_casas_proprietario(request):
+    proprietario = auth.get_user(request)
+    if proprietario.tipo == 'P':
+        casas_alugáveis = Propriedade.objects.filter(
+            proprietario=proprietario.id,
+            disponivel=False
+        )
+        propriedades = {
+            'propriedades': casas_alugáveis
+        }
+        return render(request, 'telas/desalugar.html', propriedades)
+    else:
+        return HttpResponse('Você não tem acesso à essa página.')
+
+def desalugar(request, id):
+    try:
+        propriedade = Propriedade.objects.get(id=id)
+    except Propriedade.DoesNotExist:
+        raise Http404("Casa não encontrada")
+    
+    propriedade.disponivel = True
+    propriedade.save()
+    
+    return render(request, "telas/desalugar.html")
