@@ -20,7 +20,7 @@ def login(request):
                 if usuario.tipo == 'I':
                     return redirect('/inquilino/alugar')
                 elif usuario.tipo == 'P':
-                    return redirect('/proprietario/cadastrar')
+                    return redirect('/proprietario/tela-proprietario')
             else:
                 return redirect('/auth/login/?status=2')
                 
